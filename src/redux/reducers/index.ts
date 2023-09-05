@@ -4,4 +4,9 @@
 // Configure os seus reducers.
 // ATENÇÃO: você obrigatoriamente tem que utilizar as chaves "user" e "wallet" no seu estado global
 
-export default () => {}; // delete essa linha e configure os seus reducers
+import { combineReducers } from 'redux';
+import userData from './user';
+
+const rootReducer = combineReducers({ userData });
+
+export default rootReducer;
