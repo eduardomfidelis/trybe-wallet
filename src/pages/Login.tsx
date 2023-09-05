@@ -13,19 +13,20 @@ function Login() {
   const handleEmailChange = (event:React.ChangeEvent<HTMLInputElement>) => {
     const newEmail = event.target.value;
     setEmail(newEmail);
-
-    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-    const isEmailValid = emailRegex.test(newEmail);
-
-    const isFormValid = isEmailValid && password.length >= 6;
-    setIsButtonDisabled(!isFormValid);
+    validateForm();
   };
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newPassword = event.target.value;
     setPassword(newPassword);
-    const isFormValid = email.length > 0 && newPassword.length >= 6;
-    setIsButtonDisabled(!isFormValid);
+    validateForm();
+  };
+  const validateForm = () => {
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    const isEmailValid = emailRegex.test(email);
+    const isPasswordValid = password.length >= 5;
+
+    setIsButtonDisabled(!(isEmailValid && isPasswordValid));
   };
 
   const handleLogin = (event: React.FormEvent) => {
@@ -33,7 +34,7 @@ function Login() {
     dispatch(submitLogin(email));
     console.log(email);
 
-    navegate('/Wallet');
+    navegate('/carteira');
   };
   return (
     <div>

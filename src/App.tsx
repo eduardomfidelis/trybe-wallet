@@ -7,7 +7,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={ <Login /> } />
-      <Route path="/Wallet" element={ <Wallet /> } />
+      <Route path="/carteira" element={ <Wallet /> } />
 
     </Routes>
   );
