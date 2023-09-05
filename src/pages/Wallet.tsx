@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 
 function Wallet() {
-
   const email = useSelector((state: any) => state.user.email);
   return (
     <div>
