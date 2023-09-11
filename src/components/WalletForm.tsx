@@ -56,20 +56,24 @@ function WalletForm() {
   };
 
   const handleAddExpenses = async () => {
-    const { value, description, currency } = formValue;
+    const { value, description, currency, method, tag } = formValue;
 
     const response = await fetch('https://economia.awesomeapi.com.br/json/all');
 
     const data = await response.json();
 
-    const currentExchangeRate = data[currency].ask;
-    const valueInBRL = parseFloat(value) * parseFloat(currentExchangeRate);
+    const Ask = data[currency].ask;
+    const currentExchangeRate = data[currency];
+    const valueInBRL = parseFloat(value) * parseFloat(Ask);
 
     const newExpense = {
       value,
       description,
       currency,
+      method,
+      tag,
       exchangeRate: currentExchangeRate,
+
       valueInBRL,
     };
 
