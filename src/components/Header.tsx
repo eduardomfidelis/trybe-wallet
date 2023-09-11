@@ -4,9 +4,10 @@ function Header() {
   const email = useSelector((state: any) => state.user.email);
   const expenses = useSelector((state: any) => state.wallet.expenses);
 
-  const totalBRL = expenses
-    .reduce((total: any, expense: any) => total + expense.valueInBRL, 0);
-
+  const totalBRL = expenses.reduce((total: any, expense: any) => {
+    const valueInBRL = parseFloat(expense.value) * parseFloat(expense.exchangeRate.ask);
+    return total + valueInBRL;
+  }, 0);
   return (
     <div>
       <header>

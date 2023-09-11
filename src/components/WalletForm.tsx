@@ -12,7 +12,7 @@ function WalletForm() {
     tag: 'Alimentação',
     currency: 'USD',
   });
-
+  const [expenseId, setExpenseId] = useState(0);
   useEffect(() => {
     async function fetchCurrencies() {
       const response = await fetch('https://economia.awesomeapi.com.br/json/all');
@@ -62,20 +62,20 @@ function WalletForm() {
 
     const data = await response.json();
 
-    const Ask = data[currency].ask;
+    // const Ask = data[currency].ask;
     const currentExchangeRate = data[currency];
-    const valueInBRL = parseFloat(value) * parseFloat(Ask);
 
     const newExpense = {
+      id: expenseId,
       value,
       description,
       currency,
       method,
       tag,
       exchangeRate: currentExchangeRate,
-
-      valueInBRL,
     };
+
+    setExpenseId(expenseId + 1);
 
     dispatch(addExpense(newExpense));
 
