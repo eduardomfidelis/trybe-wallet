@@ -26,7 +26,11 @@ function Table() {
               <td>{expense.method}</td>
               <td>{parseFloat(expense.value).toFixed(2)}</td>
               <td>{expense.exchangeRates[expense.currency].name}</td>
-              <td>{parseFloat(expense.exchangeRates[expense.currency].ask)}</td>
+              <td>
+                {parseFloat(expense.exchangeRates[expense.currency].ask)
+                  .toFixed(2)}
+
+              </td>
               <td>
                 {(parseFloat(expense.value)
                 * parseFloat(expense.exchangeRates[expense.currency].ask))
@@ -34,7 +38,7 @@ function Table() {
 
               </td>
               <td>Real</td>
-              <td>Editar/Excluir</td>
+              <td><button>Editar/Excluir</button></td>
             </tr>
           ))}
         </tbody>
