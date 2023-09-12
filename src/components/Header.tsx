@@ -5,7 +5,10 @@ function Header() {
   const expenses = useSelector((state: any) => state.wallet.expenses);
 
   const totalBRL = expenses.reduce((total: any, expense: any) => {
-    const valueInBRL = parseFloat(expense.value) * parseFloat(expense.exchangeRate.ask);
+    const { value, exchangeRates, currency } = expense;
+
+    const valueInBRL = parseFloat(value) * parseFloat(exchangeRates[currency].ask);
+
     return total + valueInBRL;
   }, 0);
   return (

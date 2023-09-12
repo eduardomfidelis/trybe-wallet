@@ -61,9 +61,10 @@ function WalletForm() {
     const response = await fetch('https://economia.awesomeapi.com.br/json/all');
 
     const data = await response.json();
+    // console.log(data);
 
     // const Ask = data[currency].ask;
-    const currentExchangeRate = data[currency];
+    const currentExchangeRate = data;
 
     const newExpense = {
       id: expenseId,
@@ -72,7 +73,7 @@ function WalletForm() {
       currency,
       method,
       tag,
-      exchangeRate: currentExchangeRate,
+      exchangeRates: currentExchangeRate,
     };
 
     setExpenseId(expenseId + 1);
@@ -138,8 +139,8 @@ function WalletForm() {
         onChange={ handleMethodChange }
       >
         <option value="dinheiro">Dinheiro</option>
-        <option value="credito">Cartão de crédito</option>
-        <option value="debito">Cartão de débito</option>
+        <option value="Cartão de crédito">Cartão de crédito</option>
+        <option value="Cartão de débito">Cartão de débito</option>
       </select>
 
       <label htmlFor="tag">Categoria</label>
