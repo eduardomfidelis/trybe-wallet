@@ -1,7 +1,25 @@
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteExpense } from '../redux/actions';
 
 function Table() {
   const expenses = useSelector((state: any) => state.wallet.expenses);
+  const dispatch = useDispatch();
+  const [totalBRL, setTotalBRL] = useState(0);
+
+  const handleDeleteExpense = (expenseId: number) => {
+    const expenseIndex = expenses.findIndex((expense: any) => expense.id === expenseId);
+
+    if (expenseIndex !== -1) {
+      const updatedExpenses = [...expenses];
+      const deletedExpense = updatedExpenses.splice(expenseIndex, 1)[0];
+
+      dispatch(deleteExpense(deletedExpense));
+
+      const updatedTotal = totalBRL - deletedExpense.valueInBRL;
+      setTotalBRL(updatedTotal);
+    }
+  };
   return (
     <div>
       <table>
@@ -38,7 +56,15 @@ function Table() {
 
               </td>
               <td>Real</td>
-              <td><button>Editar/Excluir</button></td>
+              <td>
+                <button
+                  data-testid="delete-btn"
+                  onClick={ () => handleDeleteExpense(expense.id) }
+                >
+                  Editar/Excluir
+                </button>
+
+              </td>
             </tr>
           ))}
         </tbody>
